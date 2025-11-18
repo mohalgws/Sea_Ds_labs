@@ -1,52 +1,47 @@
-# Load required libraries
-library(readr)
+# COVID-19 Data Visualization (R Project)
 
-# Step 1: Import dataset
-covid <- read_csv("C:\\Users\\gawas\\Downloads\\country_wise_latest.csv") 
+## Overview
 
-# ----------- VISUALIZATIONS ----------- #
+This project analyzes and visualizes country-wise COVID-19 data. Using R, it produces a series of informative plots to understand the global distribution and major trends related to confirmed cases, deaths, recoveries, and actives cases. All code and visualizations are designed for clarity and easy reproducibility.
 
-# 1. Pie Chart (Top 6 countries by Confirmed cases)
-top_countries <- covid[order(-covid$Confirmed),][1:6,]
-sectors <- top_countries$CountryRegion
-values <- as.numeric(top_countries$Confirmed)
-total <- sum(values)
-percent_labels <- round(values / total * 100, 1)
-labels <- paste0(sectors, "\n", values, " (", percent_labels, "%)")
-mycolors <- c("tomato", "skyblue", "gold", "seagreen", "orchid", "grey70")
-pie(
-  values,
-  labels = labels,
-  col = mycolors,
-  main = "Top 6 Countries by Confirmed Cases"
-)
+## Dataset
 
-# 2. Stacked Bar Chart (Confirmed, Deaths, Recovered, Active in top 6 countries)
-values_matrix <- as.matrix(top_countries[, c("Confirmed", "Deaths", "Recovered", "Active")])
-rownames(values_matrix) <- top_countries$CountryRegion
+- **Filename:** `country_wise_latest.csv`
+- **Source:** Provided as part of course assignment.
+- **Description:** This dataset contains COVID-19 statistics per country, including confirmed cases, deaths, recoveries, active cases, and new cases.
 
-barplot(t(values_matrix),
-        beside = FALSE,
-        col = c("tomato", "darkred", "skyblue", "green"),
-        las = 2,
-        main = "Pandemic Impact by Country (Top 6)")
+## Visualizations Created
 
-legend("topleft",legend = colnames(values_matrix),fill = c("tomato", "darkred", "skyblue", "green"))
+1. **Pie Chart:**  
+   - Displays the top 6 countries by confirmed cases, showing count and percent contribution.
+2. **Stacked Bar Chart:**  
+   - Compares confirmed, deaths, recovered, and active cases for the top 6 countries, using color-coded stacks.
+3. **Scatter Plot:**  
+   - Shows the relationship between confirmed cases and deaths for all countries.
+4. **Line Chart:**  
+   - Plots confirmed cases for the top 6 countries to compare their trends.
 
+All plots are saved in `covid_visualizations.pdf`.
 
-# 3. Scatter Plot (Confirmed vs Deaths, all countries)
-plot(covid$Confirmed, covid$Deaths,
-     col = "orange",
-     pch = 19,
-     main = "Confirmed vs Deaths (All Countries)",
-     xlab = "Confirmed Cases",
-     ylab = "Deaths")
+## How to Reproduce
 
-# 4. Line Chart (Confirmed cases, top 6)
-plot(1:6, top_countries$Confirmed, type = "o",
-     col = "red",
-     xaxt = "n",
-     main = "Confirmed Cases in Top 6 Countries",
-     xlab = "Country",
-     ylab = "Region")
-axis(1, at = 1:6, labels = top_countries$CountryRegion)
+1. Place `country_wise_latest.csv` in your working directory.
+2. Open the R script and run all code blocks, making sure packages `readr` (and `plotrix` if using 3D pie) are installed.
+3. The plots will be saved to a single PDF file as specified by the code.
+
+## Key Insights
+
+- The pandemic is heavily concentrated in a few countries, which dominate global statistics for cases and deaths.
+- There are substantial differences in recovery and active case rates among nations with high case counts.
+- Scatter and line plots reveal that higher confirmed cases often mean higher deaths, but with country-specific exceptions.
+- Bar and pie charts visually highlight the disproportionate burden shouldered by the leading nations in the pandemic.
+
+## Files Included
+
+- `country_wise_latest.csv` — Main data source.
+- `covid_visualizations.pdf` — All generated visualizations.
+- `README.md` — Project overview and instructions.
+
+## Author/Submitter
+
+- *Mohal Manohar Gawas*
