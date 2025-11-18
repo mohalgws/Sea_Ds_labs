@@ -34,7 +34,7 @@ barplot(t(values_matrix),
 legend("topleft",legend = colnames(values_matrix),fill = c("tomato", "darkred", "skyblue", "green"))
 
 
-# 4. Scatter Plot (Confirmed vs Deaths, all countries)
+# 3. Scatter Plot (Confirmed vs Deaths, all countries)
 plot(covid$Confirmed, covid$Deaths,
      col = "orange",
      pch = 19,
@@ -42,7 +42,7 @@ plot(covid$Confirmed, covid$Deaths,
      xlab = "Confirmed Cases",
      ylab = "Deaths")
 
-# 5. Line Chart (Confirmed cases, top 6)
+# 4. Line Chart (Confirmed cases, top 6)
 plot(1:6, top_countries$Confirmed, type = "o",
      col = "red",
      xaxt = "n",
